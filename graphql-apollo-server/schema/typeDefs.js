@@ -10,7 +10,7 @@ const typeDefs = gql`
     title: String!
   }
   type Query {
-    getTodo: [Todo!]!
+    todos: [Todo!]!
   }
   type Mutation {
     createTodo(todoInput: TodoInput): Todo

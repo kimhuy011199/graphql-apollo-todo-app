@@ -2,7 +2,7 @@ const Todo = require('../models/todoModel');
 
 const resolvers = {
   Query: {
-    getTodo: async (parent, args) => {
+    todos: async (parent, args) => {
       try {
         return await Todo.find();
       } catch (error) {
