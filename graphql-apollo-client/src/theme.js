@@ -14,7 +14,7 @@ const theme = extendTheme({
     gray1: '#566992',
   },
   config: {
-    initialColorMode: 'light',
+    initialColorMode: 'dark',
     useSystemColorMode: false,
   },
   styles: {
