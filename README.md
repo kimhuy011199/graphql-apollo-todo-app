@@ -2,6 +2,8 @@
 
 A simple todo app which support CRUD tasks and mark task as done
 
+![image](https://user-images.githubusercontent.com/82280024/181157965-18dd6442-ed04-4465-8761-9d2de830eb4b.png)
+
 ## Technologies
 
 - Apollo Server
