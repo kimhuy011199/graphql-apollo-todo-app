@@ -12,7 +12,7 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        getTodo: {
+        todos: {
           merge(existing, incoming) {
             return incoming;
           },

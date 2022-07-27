@@ -3,7 +3,7 @@ import { useDisclosure } from '@chakra-ui/react';
 import { IconButton, HStack, Text, Box } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { DELETE_TODO, TOGGLE_TODO } from '../../graphql/mutation/todoMutation';
-import { GET_TODO } from '../../graphql/query/todoQuery';
+import { GET_TODOS } from '../../graphql/query/todoQuery';
 import { ReactComponent as EditIcon } from '../../assets/icons/edit.svg';
 import { ReactComponent as RemoveIcon } from '../../assets/icons/remove.svg';
 import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg';
@@ -17,11 +17,11 @@ const TodoItem = props => {
   const [deleteTodo] = useMutation(DELETE_TODO, {
     variables: { deleteTodoId: todo._id },
     update(cache, { data: { deleteTodo } }) {
-      const { getTodo } = cache.readQuery({ query: GET_TODO });
+      const { todos } = cache.readQuery({ query: GET_TODOS });
 
       cache.writeQuery({
-        query: GET_TODO,
-        data: { getTodo: getTodo.filter(item => item._id !== deleteTodo._id) },
+        query: GET_TODOS,
+        data: { todos: todos.filter(item => item._id !== deleteTodo._id) },
       });
     },
   });
@@ -29,12 +29,12 @@ const TodoItem = props => {
   const [toggleTodo] = useMutation(TOGGLE_TODO, {
     variables: { toggleTodoId: todo._id },
     update(cache, { data: { toggleTodo } }) {
-      const { getTodo } = cache.readQuery({ query: GET_TODO });
+      const { todos } = cache.readQuery({ query: GET_TODOS });
 
       cache.writeQuery({
-        query: GET_TODO,
+        query: GET_TODOS,
         data: {
-          getTodo: getTodo.map(item =>
+          todos: todos.map(item =>
             item._id === toggleTodo._id ? toggleTodo : item
           ),
         },

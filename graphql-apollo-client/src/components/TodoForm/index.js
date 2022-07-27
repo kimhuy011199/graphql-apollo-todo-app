@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { HStack, IconButton, Input } from '@chakra-ui/react';
 import { CREATE_TODO } from '../../graphql/mutation/todoMutation';
-import { GET_TODO } from '../../graphql/query/todoQuery';
+import { GET_TODOS } from '../../graphql/query/todoQuery';
 import { ReactComponent as NewIcon } from '../../assets/icons/new.svg';
 
 const TodoForm = () => {
@@ -11,11 +11,11 @@ const TodoForm = () => {
   const [createTodo] = useMutation(CREATE_TODO, {
     variables: { todoInput: { title } },
     update(cache, { data: { createTodo } }) {
-      const { getTodo } = cache.readQuery({ query: GET_TODO });
+      const { todos } = cache.readQuery({ query: GET_TODOS });
 
       cache.writeQuery({
-        query: GET_TODO,
-        data: { getTodo: [createTodo, ...getTodo] },
+        query: GET_TODOS,
+        data: { todos: [createTodo, ...todos] },
       });
     },
   });

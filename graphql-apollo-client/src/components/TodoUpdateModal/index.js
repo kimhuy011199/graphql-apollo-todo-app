@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { UPDATE_TODO } from '../../graphql/mutation/todoMutation';
-import { GET_TODO } from '../../graphql/query/todoQuery';
+import { GET_TODOS } from '../../graphql/query/todoQuery';
 
 const TodoUpdateModal = props => {
   const { todo, isOpen, onClose } = props;
@@ -22,12 +22,12 @@ const TodoUpdateModal = props => {
   const [updateTodo] = useMutation(UPDATE_TODO, {
     variables: { updateTodoId: todo._id, todoInput: { title: updatedValue } },
     update(cache, { data: { updateTodo } }) {
-      const { getTodo } = cache.readQuery({ query: GET_TODO });
+      const { todos } = cache.readQuery({ query: GET_TODOS });
 
       cache.writeQuery({
-        query: GET_TODO,
+        query: GET_TODOS,
         data: {
-          getTodo: getTodo.map(item =>
+          todos: todos.map(item =>
             item._id === updateTodo._id ? updateTodo : item
           ),
         },

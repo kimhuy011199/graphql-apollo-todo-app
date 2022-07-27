@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-const GET_TODO = gql`
-  query getTodo {
-    getTodo {
+const GET_TODOS = gql`
+  query getTodos {
+    todos {
       _id
       title
       isDone
@@ -10,4 +10,4 @@ const GET_TODO = gql`
   }
 `;
 
-export { GET_TODO };
+export { GET_TODOS };

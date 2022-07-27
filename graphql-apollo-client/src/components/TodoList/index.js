@@ -2,10 +2,10 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { VStack, Center, Spinner, Text } from '@chakra-ui/react';
 import TodoItem from '../TodoItem';
-import { GET_TODO } from '../../graphql/query/todoQuery';
+import { GET_TODOS } from '../../graphql/query/todoQuery';
 
 const TodoList = () => {
-  const { loading, error, data } = useQuery(GET_TODO);
+  const { loading, error, data } = useQuery(GET_TODOS);
 
   if (loading) {
     return (
@@ -20,9 +20,9 @@ const TodoList = () => {
 
   return (
     <>
-      {data?.getTodo?.length > 0 ? (
+      {data?.todos?.length > 0 ? (
         <VStack alignItems="flex-start" h="60vh" overflowY="scroll">
-          {data?.getTodo.map(item => (
+          {data?.todos.map(item => (
             <TodoItem key={item._id} todo={item} />
           ))}
         </VStack>
