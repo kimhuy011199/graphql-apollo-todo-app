@@ -15,7 +15,7 @@ const resolvers = {
     createTodo: async (parent, args) => {
       try {
         const { title } = args.todoInput;
-        const data = { title, isDone: false }
+        const data = { title, isDone: false };
         return await Todo.create(data);
       } catch (error) {
         throw new Error(error);
@@ -34,7 +34,9 @@ const resolvers = {
     updateTodo: async (parent, args) => {
       try {
         const { id, todoInput } = args;
-        return await Todo.findOneAndUpdate(id, todoInput, { new: true });
+        return await Todo.findOneAndUpdate({ _id: id }, todoInput, {
+          new: true,
+        });
       } catch (error) {
         throw new Error(error);
       }
